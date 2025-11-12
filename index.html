@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tonalli Market</title>
+  <link rel="stylesheet" href="diseño.css">  
+  <!-- 🔹 Enlace a los íconos de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header class="encabezado">
+    <div class="logo-container">
+      <img src="Imagenes/LOGO.jpeg" alt="Logo Tonalli Market" class="logo">
+      <div class="texto-header">
+        <h1>Tonalli Market</h1>
+        <p>¡Aprovecha nuestros descuentos especiales!</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#contacto">Contacto</a>
+      
+      <!-- ventana registro -->
+      <div class="boton-modal">
+        <label for="btn-modal">Registrarse</label>
+      </div>
+
+      <input type="checkbox" id="btn-modal">
+      <div class="container-modal">
+        <div class="content-modal">
+          <h2>FORMULARIO DE REGISTRO</h2>
+          <img src="Imagenes/LOGO.jpeg" alt="Logo Tonalli Market">
+       <form id="registro" action="conexion.php" method="POST" autocomplete="off">
+      <input class="cont" type="text" id="nombre" name="nombre" placeholder="Nombre:" required>
+      <br>
+      <input class="cont" type="text" id="apellido" name="apellido" placeholder="Apellido:" required>
+      <br>
+      <input class="cont" type="email" id="email" name="email" placeholder="E-mail:" required>
+     <br>
+     <input class="cont" type="tel" id="numero" name="numero" placeholder="Número:" required>
+     <br>
+     <input class="cont" type="password" id="contrasena" name="contrasena" placeholder="Contraseña:" required>
+     <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
+     <input class="bot" type="submit" value="Registrarse">
+     </form>
+          <div class="btn-cerrar">
+            <label for="btn-modal">Cerrar</label>
+          </div>
+        </div>
+      </div>
+      <!-- Carrito -->
+      <div id="carrito" style="position: relative; display: inline-block; cursor: pointer;">
+        <i class="fas fa-shopping-cart" style="font-size: 24px; color:white;"></i>
+        <span id="cantidad-carrito" aria-live="polite" style="
+          position: absolute;
+          top: -8px;
+          right: -10px;
+          background: #05590e;
+          color: #fff;
+          font-size: 12px;
+          font-weight: bold;
+          padding: 2px 6px;
+          border-radius: 50%;
+        ">0</span>
+
+        <!-- Panel desplegable -->
+        <div id="carrito-desplegable" aria-hidden="true">
+          <h4>Tu carrito</h4>
+          <div id="panel-carrito">
+            <p class="vacio">El carrito está vacío</p>
+          </div>
+
+          <div class="total-carrito" style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+            <strong>Total:</strong>
+            <span id="total">$0</span>
+          </div>
+
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button id="vaciar-carrito" style="flex:1; padding:8px; border-radius:6px; border:none; cursor:pointer;">Vaciar</button>
+            <button id="ir-pagar" style="flex:1; padding:8px; border-radius:6px; background:#28a745; color:#fff; border:none; cursor:pointer;">Pagar</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Sección principal -->
+  <main>
+    <section id="inicio" class="hero">
+      <h2>Todo lo que necesitas, ¡en un solo lugar!</h2>
+      <p>Frutas, verduras, abarrotes y más al mejor precio.</p>
+      <button onclick="mostrarOferta()">Ver ofertas</button>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos" class="productos">
+      <h2>Productos</h2>
+      <div class="grid">
+        
+        <!-- Producto 1 -->
+        <div class="card categoria-frutas">
+          <img src="Imagenes/FRUTAS.jpeg" alt="Frutas frescas">
+          <h3>Frutas frescas</h3>
+          <p>Manzanas, plátanos y más.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Manzana $20 / kg</p>
+              <button class="btn-agregar" data-id="101" data-nombre="Manzana" data-precio="20">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Plátano $15 / kg</p>
+              <button class="btn-agregar" data-id="102" data-nombre="Plátano" data-precio="15">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Naranja $18 / kg</p>
+              <button class="btn-agregar" data-id="103" data-nombre="Naranja" data-precio="18">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="card categoria-verduras">
+          <img src="Imagenes/VERDURAS.jpeg" alt="Verduras">
+          <h3>Verduras frescas</h3>
+          <p>Lechuga, espinaca y más.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Lechuga $12 / kg</p>
+              <button class="btn-agregar" data-id="201" data-nombre="Lechuga" data-precio="12">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Espinaca $10 / kg</p>
+              <button class="btn-agregar" data-id="202" data-nombre="Espinaca" data-precio="10">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Zanahoria $8 / kg</p>
+              <button class="btn-agregar" data-id="203" data-nombre="Zanahoria" data-precio="8">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANADERIA -->
+        <div class="card categoria-panaderia">
+          <img src="Imagenes/PAN.jpeg" alt="Panadería">
+          <h3>Panadería</h3>
+          <p>Pan fresco todos los días.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Dona $15 / pz</p>
+              <button class="btn-agregar" data-id="301" data-nombre="Dona" data-precio="15">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Concha $15 / pz</p>
+              <button class="btn-agregar" data-id="302" data-nombre="Concha" data-precio="15">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Rebanada $15 / pz</p>
+              <button class="btn-agregar" data-id="303" data-nombre="Rebanada" data-precio="15">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Productos adicionales -->
+    <section class="productos">
+      <h2>Productos destacados</h2>
+      <div class="grid">
+
+        <!-- Congelados -->
+        <div class="card categoria-congelados">
+          <img src="Imagenes/CONGELADOS.jpeg" alt="Congelados">
+          <h3>Congelados</h3>
+          <p>Productos congelados de alta calidad.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Pollo $120 / kg</p>
+              <button class="btn-agregar" data-id="401" data-nombre="Pollo" data-precio="120">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Mix de fruta $105 / kg</p>
+              <button class="btn-agregar" data-id="402" data-nombre="Mix de fruta" data-precio="105">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Pescado $90 / kg</p>
+              <button class="btn-agregar" data-id="403" data-nombre="Pescado" data-precio="90">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maquillaje -->
+        <div class="card categoria-maquillaje">
+          <img src="Imagenes/MAQUILLAJE.jpeg" alt="Maquillaje">
+          <h3>Maquillaje</h3>
+          <p>Productos de maquillaje de alta calidad.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Rimel Prosa Negro $95 / pz</p>
+              <button class="btn-agregar" data-id="501" data-nombre="Rimel Prosa Negro" data-precio="95">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Labial Labello Cereza $95 / pz</p>
+              <button class="btn-agregar" data-id="502" data-nombre="Labial Labello Cereza" data-precio="95">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Iluminador Sheglam $95 / pz</p>
+              <button class="btn-agregar" data-id="503" data-nombre="Iluminador Sheglam" data-precio="95">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Limpieza -->
+        <div class="card categoria-limpieza">
+          <img src="Imagenes/LIMPIEZA.jpeg" alt="Limpieza">
+          <h3>Limpieza</h3>
+          <p>Limpieza del hogar.</p>
+          <br>
+          <button class="btn-ver-mas">Ver más</button>
+
+          <div class="productos-adicionales" style="display:none; margin-top:10px;">
+            <div class="producto">
+              <p>Jabon ZOTE $15 / pz</p>
+              <button class="btn-agregar" data-id="601" data-nombre="Jabon ZOTE" data-precio="15">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Fabuloso lavanda $46 / pz</p>
+              <button class="btn-agregar" data-id="602" data-nombre="Fabuloso lavanda" data-precio="46">Agregar</button>
+            </div>
+            <div class="producto">
+              <p>Ajax limpiador en polvo $35 / pz</p>
+              <button class="btn-agregar" data-id="603" data-nombre="Ajax limpiador en polvo" data-precio="35">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ofertas -->
+    <section id="ofertas" class="ofertas">
+      <h2>Ofertas de la semana</h2>
+      <img src="Imagenes/OFERTAS.jpeg" alt="¡Ofertas de la semana en Tonalli Market!">
+      <img src="Imagenes/VALIDO.jpeg" alt="VALIDO DEL 16/10/2025 HASTA EL 21/10/2025">
+        <img src="Imagenes/OFERTAS2.jfif" alt="VALIDO DEL 15/11/2025 HASTA EL 1/12/2025">
+      <p>¡Aprovecha descuentos especiales en los productos seleccionados!</p>
+      <p>Fruta congelada, pechuga de pollo y helado al <strong>2x1</strong></p>
+      <p>Leche, yogur y queso con <strong>20% de descuento</strong></p>
+    </section>
+  </main>
+
+  <!-- Modal de pago -->
+  <div id="modal-pago" class="modal" aria-hidden="true" style="display: none;">
+    <div class="modal-content">
+      <button id="cerrar-modal" class="modal-close">&times;</button>
+      <h3>Finalizar compra</h3>
+      <form id="form-pago">
+        <label>
+          Tarjeta de crédito:
+          <input type="text" placeholder="1234 5678 9012 3456" required>
+        </label>
+        <label>
+          Fecha de expiración:
+          <input type="text" placeholder="MM/AA" required>
+        </label>
+        <label>
+          CVV:
+          <input type="text" placeholder="123" required>
+        </label>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+          <button type="button" id="cancelar-pago" style="flex: 1; padding: 10px; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;">
+            Cancelar
+          </button>
+          <button type="submit" style="flex: 1; padding: 10px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer;">
+            Pagar ahora
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+   <!-- Contacto / Footer -->
+  <footer id="contacto">
+    <h2>Contacto</h2>
+    <p>Dirección: Av. Ferrocarril #123, Estado de México</p>
+    <p>📞 Teléfono: (55) 5690857482</p>
+    <p>✉ Correo: tonallimarket@gmail.com</p>
+    <p>© 2025 Tonalli Market - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="java.js"></script>
+</body>
+</html>

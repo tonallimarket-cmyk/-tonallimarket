@@ -1,0 +1,33 @@
+<?php
+// 1️⃣ Conexión a la base de datos
+$conexion = new mysqli("10.12.220.170", "", "Lagartas_120", "Tienda");
+
+// Verificar conexión
+if ($conexion->connect_error) {
+  die("Error de conexión: " . $conexion->connect_error);
+}
+
+// 2️⃣ Capturar datos del formulario
+$nombre = $_POST['nombre'] ?? '';
+$apellido = $_POST['apellido'] ?? '';
+$email = $_POST['email'] ?? '';
+$numero = $_POST['numero'] ?? '';
+$contrasena = $_POST['contrasena'] ?? '';
+
+// 3️⃣ Encriptar la contraseña (muy importante)
+$contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+// 4️⃣ Preparar y ejecutar la consulta
+$stmt = $conexion->prepare("INSERT INTO usuarios (nombre, apellido, email, numero, contrasena) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $nombre, $apellido, $email, $numero, $contrasenaHash);
+
+if ($stmt->execute()) {
+  echo "✅ Registro exitoso";
+} else {
+  echo "❌ Error al registrar: " . $stmt->error;
+}
+
+// 5️⃣ Cerrar conexión
+$stmt->close();
+$conexion->close();
+?>
